@@ -4,6 +4,7 @@ import {
   stringToTwoDimensionalArray,
   twoDimensionalArrayToString,
 } from "./helper/convert";
+import env from "react-dotenv";
 
 function App() {
   const [grid, setGrid] = useState([
@@ -29,7 +30,8 @@ function App() {
 
   const handleSubmit = async () => {
     try {
-      const res = await axios.post("http://localhost:5000/api/solve", {
+      const api = env.API_URL || "http://localhost:5000/api/solve";
+      const res = await axios.post(api, {
         input: twoDimensionalArrayToString(grid),
       });
       console.log(res);
